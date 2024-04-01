@@ -31,3 +31,45 @@ body {
     text-wrap: balance;
   }
 }
+
+
+.srollbar-none::-webkit-scrollbar{
+  display: none;
+}
+
+/* Custom scrollbar */
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+@keyframes movetop{
+  0% {
+    transition: all;
+  }
+  100%{
+    transform: scaleY(0);
+  }
+}
+
+/* .mtop:hover {
+  animation: movetop 1s alternate;
+
+} */
+
+
+.slbg{
+  background-image: url("/assets/images/reader-bg.jpg") !important;
+  background-position:center;
+}
