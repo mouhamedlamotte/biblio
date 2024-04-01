@@ -69,7 +69,16 @@ body::-webkit-scrollbar-thumb:hover {
 } */
 
 
+.login-banner-left{
+  background-image: url("/assets/images/rb.jpg") !important;
+  background-position:center;
+  background-size: cover;
+
+}
+
+
 .slbg{
   background-image: url("/assets/images/reader-bg.jpg") !important;
   background-position:center;
+  background-size: cover;
 }

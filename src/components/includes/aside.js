@@ -1,35 +1,37 @@
 import { Icon } from '@iconify/react'
+import Link from 'next/link'
 import React from 'react'
 
 export const Aside = () => {
   return (
-    <aside id="cta-button-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-    <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+    <aside id="cta-button-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gray-50 dark:bg-gray-800" aria-label="Sidebar">
+
+      <div className='p-4 flex justify-center items-center'>
+         <h3 className='text-3xl '>Bii<span className='font-bold text-green-500'>Blio</span></h3>
+      </div>
+
+    <div className="h-full px-3 py-4 overflow-y-auto ">
        <ul className="space-y-2 font-medium">
           <li>
-             <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-             <Icon icon="ooui:home" fontSize={30} className='text-gray-400 dark:group-hover:text-white' />
-                <span className="ms-3">Home</span>
-             </a>
+             <Link href="/" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group bg-green-500">
+             <Icon icon="iconamoon:discover-fill" fontSize={30} className='' />
+                <span className="flex-1 ms-3 whitespace-nowrap">Discover</span>
+             </Link>
           </li>
           <li>
-             <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+             <Link href="category" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
              <Icon icon="mdi:category" fontSize={30} className='text-gray-400 dark:group-hover:text-white' />
                 <span className="flex-1 ms-3 whitespace-nowrap">Category</span>
-             </a>
+             </Link>
           </li>
           <li>
-             <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+             <Link href="library" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
              <Icon icon="clarity:library-solid"  fontSize={30} className='text-gray-400 dark:group-hover:text-white' />
                 <span className="flex-1 ms-3 whitespace-nowrap">Library</span>
                 <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
-             </a>
+             </Link>
           </li>
           <li>
-             <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-             <Icon icon="iconamoon:discover-fill" fontSize={30} className='text-gray-400 dark:group-hover:text-white' />
-                <span className="flex-1 ms-3 whitespace-nowrap">Discover</span>
-             </a>
           </li>
           <li>
              <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">

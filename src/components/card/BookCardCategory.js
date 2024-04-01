@@ -1,22 +1,33 @@
 import { Icon } from "@iconify/react";
-import React from "react";
+import React, { useState } from "react";
 
-export const BookCardCategory = () => {
+export const BookCardCategory = ({book, onclick}) => {
+
+  const [liked, setLiked] = useState(false)
+
   return (
-    <div className="bg-gray-50 dark:bg-gray-600 rounded-md w-48 overflow-hidden  cursor-pointer">
-      <div className="h-60 w-ful p-2 relative">
-        <div className="flex justify-between absolute p-2 pr-6 w-full">
-          <button className="p-1 bg-slate-950 rounded-xl flex items-center justify-center">
+    <tab className="bg-gray-50 dark:bg-gray-600 rounded-md w-full overflow-hidden  cursor-pointer hover:bg-green-800"
+    onClick={onclick}
+    >
+      <div className="h-60 w-ful p-2 relative *:hover:flex">
+        <div className=" justify-between absolute p-2 pr-6 w-full hidden">
+          <button className={`p-1 bg-slate-950 rounded-md flex items-center justify-center z-50 ${ liked && "*:text-red-500" }`}
+          
+          onClick={(e)=>{
+            setLiked(!liked)
+          }}
+
+          >
             <Icon
               icon="material-symbols-light:favorite"
-              fontSize={15}
-              className="text-red-400 dark:group-hover:text-white"
+              fontSize={20}
+              className=""
             />
           </button>
-          <div className="p-1 bg-slate-950 rounded-xl flex items-center justify-center">
+          <div className="p-1 bg-slate-950 rounded-md flex items-center justify-center">
             <Icon
               icon="ph:star-fill"
-              fontSize={15}
+              fontSize={20}
               className="text-yellow-400 dark:group-hover:text-white"
             />
             <span className="text-sm">48</span>
@@ -29,10 +40,10 @@ export const BookCardCategory = () => {
       </div>
       <div className="p-2">
         <h4 className="font-semibold text-md truncate">
-          From the mixed up files
+          {book?.title}
         </h4>
-        <p className="text-sm mt-1 font-medium text-gray-300">El Konigsburg</p>
+        <p className="text-sm mt-1 font-medium text-gray-300">{book?.author}</p>
       </div>
-    </div>
+    </tab>
   );
 };

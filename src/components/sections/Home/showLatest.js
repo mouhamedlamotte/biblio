@@ -10,7 +10,7 @@ export const ShowLatest = () => {
           <p>Selection des mellieurs livres <br/> pour vous</p>
           <Button title="Show latest" className="mt-4" />
         </div>
-        <div className='grow flex justify-center items-center slbg'>
+        <div className='grow flex justify-center items-center'>
           {/* <img className='h-40 w-40' alt='svg' src='/assets/images/rb.jpg' /> */}
         </div>
       </div>
