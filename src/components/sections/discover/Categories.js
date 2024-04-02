@@ -23,6 +23,13 @@ export const Categories = () => {
     }
   ]
 
+
+  const [filter, setFilter] = useState("all")
+
+  const handleChangeFilter = (e) =>{
+    setFilter(e.target.value)
+  }
+
   const [selectedBook, setSelectedBook] = useState(null)
   return (
     <div className='p-6 bg-gray-50 dark:bg-gray-800 rounded-sm'>
@@ -33,15 +40,19 @@ export const Categories = () => {
             <Icon icon="solar:list-down-broken" />
         </button>
         </div>
-        <form className='py-3 flex gap-4 overflow-y-hidden overflow-x-scroll srollbar-none'>
+        <form className='py-3 flex gap-4 overflow-y-hidden overflow-x-scroll scrollbar-none'>
           <div>
-              <label htmlFor='all' className='py-1 bg-green-800 px-2 font-semibold rounded-md  flex gap-1 items-center cursor-pointer'>all</label>
-              <input id='all' type="radio" className='hidden' />
+              <label htmlFor='all' className={`py-1  px-2 font-semibold rounded-md  flex gap-1 items-center cursor-pointer ${ filter == "all" ? "bg-green-600" : "bg-gray-600" }`}>all</label>
+              <input id='all' type="radio" className='hidden'
+              value="all"
+              onClick={handleChangeFilter} />
           </div>
             
           <div>
-              <label htmlFor='all' className='py-1 bg-gray-600 px-2 font-semibold rounded-md  flex gap-1 items-center cursor-pointer'>Drame</label>
-              <input id='all' type="radio" className='hidden' />
+              <label htmlFor='drame' className={`py-1  px-2 font-semibold rounded-md  flex gap-1 items-center cursor-pointer ${ filter == "drame" ? "bg-green-600" : "bg-gray-600" }`}>Drame</label>
+              <input id='drame' type="radio" className='hidden'  value="drame"
+              onClick={handleChangeFilter}
+              />
           </div>
 
         </form>

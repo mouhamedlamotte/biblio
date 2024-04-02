@@ -2,10 +2,34 @@ import { Truncate } from "@/utils/truncate";
 import { Icon } from "@iconify/react";
 import React from "react";
 
+
 export const BookCardFlex = () => {
   return (
-    <div className="p-2 bg-gray-600 hover:bg-green-800 cursor-pointer  flex gap-2 rounded-md">
-      <div className="h-40 w-32 bg-slate-400 ">
+    <div className="p-2 bg-gray-600 hover:bg-green-800 cursor-pointer  flex gap-2 rounded-md [&_.hidden]:hover:flex">
+      <div className="h-40 w-32 bg-slate-400 relative ">
+      <div className="hidden justify-between absolute p-2  w-full">
+          <button className={`p-1 bg-slate-950 rounded-md flex items-center justify-center z-50 ${ "liked" && "*:text-red-500" }`}
+          
+          onClick={(e)=>{
+            // setLiked(!liked)
+          }}
+
+          >
+            <Icon
+              icon="material-symbols-light:favorite"
+              fontSize={20}
+              className=""
+            />
+          </button>
+          <div className="p-1 bg-slate-950 rounded-md flex items-center justify-center">
+            <Icon
+              icon="ph:star-fill"
+              fontSize={20}
+              className="text-yellow-400 dark:group-hover:text-white"
+            />
+            <span className="text-sm">48</span>
+          </div>
+        </div>
         <img className="w-full h-full" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1519632815i/37706596.jpg" />
       </div>
       <div>

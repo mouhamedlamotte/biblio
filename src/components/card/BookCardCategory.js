@@ -6,7 +6,7 @@ export const BookCardCategory = ({book, onclick}) => {
   const [liked, setLiked] = useState(false)
 
   return (
-    <tab className="bg-gray-50 dark:bg-gray-600 rounded-md w-full overflow-hidden  cursor-pointer hover:bg-green-800"
+    <div className="bg-gray-50 dark:bg-gray-600 rounded-md w-full overflow-hidden  cursor-pointer hover:bg-green-800"
     onClick={onclick}
     >
       <div className="h-60 w-ful p-2 relative *:hover:flex">
@@ -44,6 +44,6 @@ export const BookCardCategory = ({book, onclick}) => {
         </h4>
         <p className="text-sm mt-1 font-medium text-gray-300">{book?.author}</p>
       </div>
-    </tab>
+    </div>
   );
 };

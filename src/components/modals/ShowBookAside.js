@@ -18,7 +18,7 @@ export const ShowBookAside = ({ book, setBook }) => {
             <Icon icon="ep:arrow-right-bold" fontSize={15} />
                 </button>
             </div>
-          <div className="p-10 flex justify-center items-center flex-col  overflow-y-auto overflow-x-hidden h-full srollbar-none">
+          <div className="p-10 flex justify-center items-center flex-col  overflow-y-auto overflow-x-hidden h-full scrollbar-none">
             <div className="h-60 w-full bg-white p-6 rounded-md ">
               <img
                 className="w-full h-full shadow-2xl"

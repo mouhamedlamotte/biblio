@@ -27,21 +27,25 @@ export const Navbar = () => {
           ></path>
         </svg>
       </button>
-        <div className="bg-slate-200 dark:bg-slate-950 rounded-md flex items-center px-2">
-        <Icon icon="ic:round-search" fontSize={30} className="text-gray-500" />
+        <form method="get" action="/search" className="bg-slate-200 dark:bg-slate-950 rounded-md flex items-center px-2" onSubmit={(e)=>{
+            // e.preventDefault()
+        }}>
+        <Icon icon="ic:round-search" fontSize={25} className="text-gray-500" />
           <input
           autoComplete="off"
             placeholder="Rechercher un livre "
             className="p-2 outline-none  bg-transparent rounded-md"
+            name="q"
           />
-        </div>
+          {/* <input className="hidden" name="category" value="all" /> */}
+        </form>
         <div className="flex items-center gap-4 mr-5">
-        <Icon className="hidden lg:block"  icon="mdi:bell" fontSize={30} />
-        <Icon className="hidden lg:block"  icon="mdi:cart" fontSize={30} />
-          <div className="rounded-xl flex items-center px-2 gap-4">
-            <div className="h-10 w-10 bg-slate-300 animate-pulse rounded-full"></div>
-            <h4 className="hidden lg:block">Mouhamedbaba</h4>
-            <Icon className="hidden lg:block" icon="ep:arrow-down-bold" />
+        <Icon className="hidden lg:block text-gray-500"  icon="mdi:bell" fontSize={25} />
+        <Icon className="hidden lg:block text-gray-500"  icon="mdi:cart" fontSize={25} />
+          <div className="rounded-xl flex items-center px-2 gap-4 bg-slate-950 hover:bg-slate-400 *:hover:text-white p-2 cursor-pointer">
+            <div className="h-8 w-8 bg-gray-100 rounded-full"></div>
+            <h4 className="hidden lg:block text-gray-300">Mouhamedbaba</h4>
+            <Icon className="hidden lg:block text-slate-500" icon="ep:arrow-down-bold" />
           </div>
         </div>
       </div>
