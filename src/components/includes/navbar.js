@@ -1,7 +1,15 @@
+import { AuthContext } from "@/context/authContext";
 import { Icon } from "@iconify/react";
-import React from "react";
+import React, { useContext } from "react";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 export const Navbar = () => {
+
+  const { user } = useContext(AuthContext)
+  const router = useRouter()
+
+
   return (
     <nav className="bg-gray-50 dark:bg-gray-800 py-5 px-2 lg:px-0">
       <div className="flex justify-between items-center">
@@ -39,16 +47,30 @@ export const Navbar = () => {
           />
           {/* <input className="hidden" name="category" value="all" /> */}
         </form>
-        <div className="flex items-center gap-4 mr-5">
-        <Icon className="hidden lg:block text-gray-500"  icon="mdi:bell" fontSize={25} />
-        <Icon className="hidden lg:block text-gray-500"  icon="mdi:cart" fontSize={25} />
-          <div className="rounded-xl flex items-center px-2 gap-4 bg-slate-950 hover:bg-slate-400 *:hover:text-white p-2 cursor-pointer">
-            <div className="h-8 w-8 bg-gray-100 rounded-full"></div>
-            <h4 className="hidden lg:block text-gray-300">Mouhamedbaba</h4>
-            <Icon className="hidden lg:block text-slate-500" icon="ep:arrow-down-bold" />
-          </div>
+
+        {
+          user ? (
+          <div className="flex items-center gap-4 mr-5">
+            <Icon className="hidden lg:block text-gray-500"  icon="mdi:bell" fontSize={25} />
+            <Icon className="hidden lg:block text-gray-500"  icon="mdi:cart" fontSize={25} />
+              <div className="rounded-xl flex items-center px-2 gap-4 bg-slate-950 hover:bg-slate-400 *:hover:text-white p-2 cursor-pointer">
+                <div className="h-8 w-8 bg-gray-100 rounded-full"></div>
+                <h4 className="hidden lg:block text-gray-300">Mouhamedbaba</h4>
+                <Icon className="hidden lg:block text-slate-500" icon="ep:arrow-down-bold" />
+              </div>
+            </div>
+   
+          ) : (
+            <div className="flex items-center gap-4 mr-5">
+            <Button 
+            onclick={()=>{
+              router.push("/auth/login")
+            }}
+            title="Se connecter" icon={<Icon icon="mdi:login" />} className={"flex justify-center items-center gap-2"} />
+            </div>
+          )
+        }
         </div>
-      </div>
     </nav>
   );
 };

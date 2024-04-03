@@ -27,7 +27,7 @@ export const ShowBookAside = ({ book, setBook }) => {
             </div>
             <div className="p-2 mt-3">
               <h4 className="font-semibold text-md truncate text-center">
-                {book.title}
+                {book.name}
               </h4>
               <p className="text-sm mt-1 font-medium text-gray-300 text-center">
                 {book.author}
@@ -44,7 +44,7 @@ export const ShowBookAside = ({ book, setBook }) => {
 
             <div className="flex mt-10">
               <div className="text-center px-4">
-                <h3 className="text-lg">320</h3>
+                <h3 className="text-lg">{book.page_number}</h3>
                 <p className="text-xs">pages</p>
               </div>
               <div className="text-center border-x-2 px-4 border-gray-500">
@@ -59,7 +59,7 @@ export const ShowBookAside = ({ book, setBook }) => {
             <p className="text-xs text-center font-bold mt-10 text-gray-200">
               <Truncate
                 str={
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptatem eveniet quisquam totam natus animi sint tempore atque ea distinctio sunt doloribus sit sequi veniam officia fugiat eaque laboriosam vel. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptatem eveniet quisquam totam natus animi sint tempore atque ea distinctio sunt doloribus sit sequi veniam officia fugiat eaque laboriosam vel."
+                  book.resume
                 }
                 max={300}
                 len={300}

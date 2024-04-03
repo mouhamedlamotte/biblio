@@ -1,33 +1,56 @@
+import { filterBooksCategory, getBooks, getCategories } from '@/api/books'
 import { BookCardCategory } from '@/components/card/BookCardCategory'
 import { ShowBookAside } from '@/components/modals/ShowBookAside'
 import { Icon } from '@iconify/react'
-import React, { useState } from 'react'
+import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
 
 export const Categories = () => {
 
-  const books = [
-    {
-      "id" : 1,
-      "title" : "Mind platter",
-      "author" : "zebian"
-    },
-    {
-      "id" : 2,
-      "title" : "from the mixed up",
-      "author" : "el konig"
-    },
-    {
-      "id" : 3,
-      "title" : "diambar",
-      "author" : "aly"
+  const [categories, setCategories] = useState()
+  const [books, setBooks] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  const get_categories = async () => {
+    setLoading(true)
+    const data = await getCategories()
+    if (data) {
+      setCategories(data)}
+      setLoading(false)
     }
-  ]
+    
+    const get_books = async () => {
+      setLoading(true)
+      const data = await getBooks()
+      if (data) {
+        setBooks(data)
+      }
+      // setLoading(!loading)}
+  }
+
+  useEffect(() => {
+    return () => {
+      get_categories()
+      get_books()
+    };
+  }, []);
+
+  
 
 
   const [filter, setFilter] = useState("all")
 
-  const handleChangeFilter = (e) =>{
+  const handleChangeFilter = async (e) =>{
     setFilter(e.target.value)
+    if (e.target.value == "all") {
+      get_books()
+    } else {
+      const data = await filterBooksCategory(e.target.value)
+      if (data) {
+        setBooks(data)
+      }
+    }
+
   }
 
   const [selectedBook, setSelectedBook] = useState(null)
@@ -47,26 +70,41 @@ export const Categories = () => {
               value="all"
               onClick={handleChangeFilter} />
           </div>
-            
-          <div>
-              <label htmlFor='drame' className={`py-1  px-2 font-semibold rounded-md  flex gap-1 items-center cursor-pointer ${ filter == "drame" ? "bg-green-600" : "bg-gray-600" }`}>Drame</label>
-              <input id='drame' type="radio" className='hidden'  value="drame"
-              onClick={handleChangeFilter}
-              />
-          </div>
+            {
+              categories?.map((category) =>{
+                return (
+                  <div key={category.id}>
+                  <label htmlFor={category?.id} className={`py-1  px-2 font-semibold rounded-md truncate  flex gap-1 items-center cursor-pointer ${ filter == category?.id ? "bg-green-600" : "bg-gray-600" }`}>{category.name}</label>
+                  <input id={category?.id} type="radio" className='hidden'  value={category?.id}
+                  onClick={handleChangeFilter}
+                  />
+              </div>
+                )
+              })
+            }
 
         </form>
-        <div className='grid grid-cols-2 :grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 mt-4 items-center'>
+
+
           {
-            books.map((book) =>{
-              return (
-                <BookCardCategory book={book} onclick={(e) =>{
-                  setSelectedBook(book)
-                }} key={book.id} />
+            books.length > 0 ? 
+            (
+            <div className='grid grid-cols-2 :grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 mt-4 items-center'>
+              {books.map((book) =>{
+                return (
+                  <BookCardCategory book={book} onclick={(e) =>{
+                    setSelectedBook(book)
+                  }} key={book.id} />
+                )
+              })}
+            </div>
+            ) : (
+                <div className='flex justify-center flex-col w-full items-center'>
+                  <Image src="/assets/images/empty_books.png" width={400} height={400} alt="ampty books" />
+                  <h3 className='text-3xl font-semibold'>Aucun livre trouve pour cette categorie</h3>
+                  </div>
               )
-            })
           }
-        </div>
     </div>
   )
 }

@@ -1,34 +1,43 @@
-import { LoginUser } from '@/api/base'
+import { registerUser } from '@/api/base'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 
-export const LoginForm = () => {
+export const RegisterForm = ({setIsloading}) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("")
     const router = useRouter()
 
     const handleSubmit = async (e) => {
-      e.preventDefault()
-      const user = {
-          username, password
-      }
-      const response = await LoginUser(user)
-      if (response) {
-          const user = response.data
-          // router.refresh()
-          router.push('/')
+        e.preventDefault()
+        setIsloading(true)
+        const data = {
+            username: username,
+            password: password,
+            email: email
+        }
 
-      }else{
-          toast.error("Identifiant incorrect")
-      }
-  }
+        let response = await registerUser(data)
+        if (response) {
+            const user = response.data
+            console.log(user);
+            toast.success("Enregistrement reussi")
+            router.push('/auth/login')
+        }else{
+            toast.error("Une erreur est survenue lors de l'enregistrement")
+        }
+        setIsloading(false)
+    }
+    
+
+
+
   return (
     
-    <form  className="p-6 bg-gray-50  dark:bg-gray-900 rounded-md w-full sm:w-96  " onSubmit={handleSubmit}>
-      
+    <form method='post'  className="p-6 bg-gray-50  dark:bg-gray-900 rounded-md w-full sm:w-96  " onSubmit={handleSubmit}>
     <div className="p-4 flex justify-center items-center">
       <Link href='/' className="text-3xl ">
         Bi<span className="font-bold text-green-500">Blio</span>
@@ -51,6 +60,22 @@ export const LoginForm = () => {
       />
     </div>
     <div className="mt-5 flex flex-col gap-2">
+      <label htmlFor="email" className="font-bold">
+        Email
+      </label>
+      <input
+      onChange={(e)=>{
+        setEmail(e.target.value)
+      }}
+      value={email}
+        type="email"
+        placeholder="email"
+        name="email"
+        id="email"
+        className="bg-slate-700 p-2 rounded-md border-none focus:border focus w-full focus:border-green-500 outline-none"
+      />
+    </div>
+    <div className="mt-5 flex flex-col gap-2">
       <label htmlFor="password" className="font-bold">
         Password
       </label>
@@ -65,16 +90,13 @@ export const LoginForm = () => {
         placeholder="**********"
         className="bg-slate-700 p-2 rounded-md border-none focus:border focus w-full focus:border-green-500 outline-none"
       />
-      <a href="#hh" className=" text-xs text-red-500 text-end">
-        Mot de passe oublie ?
-      </a>
     </div>
     <div className="flex justify-center mt-5">
-      <Button type="sumbit" title={"Se connecter"} />
+      <Button type="sumbit" title={"Creer un compte"} />
     </div>
     <div className="flex justify-center mt-5">
-      <p>pas de compte ?<Link href="/auth/register" className="ms-2 text-green-500 text-end">
-        creer un compte
+      <p>Deja un compte ?<Link href="/auth/login" className="ms-2 text-blue-500 text-end">
+        Se connecter 
         </Link> </p>
 
     </div>

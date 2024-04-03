@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import Image from "next/image";
 import React, { useState } from "react";
 
 export const BookCardCategory = ({book, onclick}) => {
@@ -33,14 +34,16 @@ export const BookCardCategory = ({book, onclick}) => {
             <span className="text-sm">48</span>
           </div>
         </div>
-        <img
+        <Image width={100} height={100}
           className="w-full h-full shadow-2xl rounded-md"
-          src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1519632815i/37706596.jpg"
+          src={
+            book?.banner != null ? book?.banner : "/assets/images/default_book_cover.png" }
+            alt="book image"
         />
       </div>
       <div className="p-2">
         <h4 className="font-semibold text-md truncate">
-          {book?.title}
+          {book?.name}
         </h4>
         <p className="text-sm mt-1 font-medium text-gray-300">{book?.author}</p>
       </div>

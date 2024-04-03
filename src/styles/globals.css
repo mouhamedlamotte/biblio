@@ -82,3 +82,54 @@ body::-webkit-scrollbar-thumb:hover {
   background-position:center;
   background-size: cover;
 }
+
+.loader {
+  width: 75px;
+  aspect-ratio: 1; 
+  display: grid;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  grid-area: 1/1;
+  width: 35px;
+  aspect-ratio: 1;
+  box-shadow: 0 0 0 3px #fff inset;
+  filter: drop-shadow(40px 40px 0 #fff);
+  animation: l8 2s infinite alternate;
+}
+.loader:after {
+  margin: 0 0 0 auto; 
+  filter: drop-shadow(-40px 40px 0 #fff);
+  animation-delay: -1s;
+}
+@keyframes l8 {
+  0%,10%   {border-radius:0}
+  30%,40%  {border-radius:50% 0}
+  60%,70%  {border-radius:50%}
+  90%,100% {border-radius:0 50%}
+}
+
+
+
+/* HTML: <div class="loader"></div> */
+.section_loader {
+  width: 55px;
+  aspect-ratio: 1;
+  --g1:conic-gradient(from  90deg at top    3px left  3px,#0000 90deg,#fff 0);
+  --g2:conic-gradient(from -90deg at bottom 3px right 3px,#0000 90deg,#fff 0);
+  background:
+    var(--g1),var(--g1),var(--g1),var(--g1), 
+    var(--g2),var(--g2),var(--g2),var(--g2);
+  background-position: 0 0,100% 0,100% 100%,0 100%;
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  animation: l11 1.5s infinite;
+}
+@keyframes l11 {
+  0%   {background-size:35px 15px,15px 15px,15px 35px,35px 35px}
+  25%  {background-size:35px 35px,15px 35px,15px 15px,35px 15px}
+  50%  {background-size:15px 35px,35px 35px,35px 15px,15px 15px}
+  75%  {background-size:15px 15px,35px 15px,35px 35px,15px 35px}
+  100% {background-size:35px 15px,15px 15px,15px 35px,35px 35px}
+}
