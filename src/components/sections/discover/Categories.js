@@ -12,6 +12,7 @@ export const Categories = () => {
   const [books, setBooks] = useState([])
   const [loading, setLoading] = useState(true)
 
+
   const get_categories = async () => {
     setLoading(true)
     const data = await getCategories()
@@ -30,10 +31,8 @@ export const Categories = () => {
   }
 
   useEffect(() => {
-    return () => {
       get_categories()
       get_books()
-    };
   }, []);
 
   
