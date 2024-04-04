@@ -35,10 +35,10 @@ export const BookCardCategory = ({book, onclick}) => {
           </div>
         </div>
         <Image width={100} height={100}
-          className="w-full h-full shadow-2xl rounded-md"
+          className="w-full h-full rounded-md"
           src={
             book?.banner != null ? book?.banner : "/assets/images/default_book_cover.png" }
-            alt="book image"
+            alt="book image"  
         />
       </div>
       <div className="p-2">

@@ -1,5 +1,6 @@
 import { filterBooksCategory, getBooks, getCategories } from '@/api/books'
 import { BookCardCategory } from '@/components/card/BookCardCategory'
+import { Loader } from '@/components/includes/loader'
 import { ShowBookAside } from '@/components/modals/ShowBookAside'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
@@ -16,16 +17,16 @@ export const Categories = () => {
     const data = await getCategories()
     if (data) {
       setCategories(data)}
-      setLoading(false)
+      // setLoading(false)
     }
     
     const get_books = async () => {
       setLoading(true)
       const data = await getBooks()
+      setLoading(false)
       if (data) {
         setBooks(data)
       }
-      // setLoading(!loading)}
   }
 
   useEffect(() => {
@@ -55,7 +56,8 @@ export const Categories = () => {
 
   const [selectedBook, setSelectedBook] = useState(null)
   return (
-    <div className='p-6 bg-gray-50 dark:bg-gray-800 rounded-sm'>
+    <div className='p-6 bg-gray-50 dark:bg-gray-800 rounded-sm overflow-hidden relative'>
+      <Loader isloading={loading} />
       <ShowBookAside book={selectedBook} setBook={setSelectedBook} />
         <div className='flex justify-between items-center'>
         <h6 className='text-lg font-semibold'>Categories</h6>
@@ -99,9 +101,9 @@ export const Categories = () => {
               })}
             </div>
             ) : (
-                <div className='flex justify-center flex-col w-full items-center'>
-                  <Image src="/assets/images/empty_books.png" width={400} height={400} alt="ampty books" />
-                  <h3 className='text-3xl font-semibold'>Aucun livre trouve pour cette categorie</h3>
+                <div className={`flex justify-center flex-col w-full items-center ${loading ? "h-80  w-full" : ""}`}>
+                  <Image className={`${loading ? "hidden" : ""}`} src="/assets/images/empty_books.png" width={400} height={400} alt="ampty books" />
+                  <h3 className={`${loading ? "hidden" : ""} text-3xl font-semibold`}>Aucun livre trouve pour cette categorie</h3>
                   </div>
               )
           }

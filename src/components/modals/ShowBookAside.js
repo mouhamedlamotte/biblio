@@ -2,12 +2,13 @@ import { Truncate } from "@/utils/truncate";
 import { Icon } from "@iconify/react";
 import React from "react";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 export const ShowBookAside = ({ book, setBook }) => {
   return (
     <>
       {book && (
-        <div className="fixed top-0 right-0 z-40 w-72 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gray-50 dark:bg-slate-950 rounde">
+        <div className="fixed top-0 right-0 z-40 w-72 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gray-50 dark:bg-slate-950 rounded ">
             <div className="absolute flex  top-4  -left-4">
                 <button className=" p-2 rounded-lg bg-green-500 hover:opacity-85 hover:mr-2" 
                 onClick={(e) =>{
@@ -19,17 +20,21 @@ export const ShowBookAside = ({ book, setBook }) => {
                 </button>
             </div>
           <div className="p-10 flex justify-center items-center flex-col  overflow-y-auto overflow-x-hidden h-full scrollbar-none">
-            <div className="h-60 w-full bg-white p-6 rounded-md ">
-              <img
+            <div className="h-60 w-full bg-white p-2 rounded-md ">
+              <Image
                 className="w-full h-full shadow-2xl"
-                src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1519632815i/37706596.jpg"
+                width={200}
+                height={200}
+                src={
+                book?.banner != null ? book?.banner : "/assets/images/default_book_cover.png" }
+                alt="book image"
               />
             </div>
             <div className="p-2 mt-3">
-              <h4 className="font-semibold text-md truncate text-center">
-                {book.name}
+              <h4 className="font-semibold text-md text-center truncate">
+              <Truncate str={book.name} max={30} len={30} />
               </h4>
-              <p className="text-sm mt-1 font-medium text-gray-300 text-center">
+              <p className="text-sm mt-1 font-medium text-gray-300 text-center truncate">
                 {book.author}
               </p>
             </div>

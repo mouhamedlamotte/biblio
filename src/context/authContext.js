@@ -20,7 +20,8 @@ export const AuthContextProvider = ({ children }) => {
         const access_token = get_user_tokken();
         if (access_token) {
             const decoded_token = jwtDecode(access_token);
-            const user_id = decoded_token.user_id
+            const sub = decoded_token.sub
+            const user_id = sub.user_id
             return user_id
         }
     }

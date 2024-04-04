@@ -4,9 +4,10 @@ import { Cookies } from 'react-cookie';
 
 export const axiosInstance = axios.create({
   baseURL: 'http://127.0.0.1:5000/',
-  timeout: 5000, 
   headers: {
     'Content-Type': 'application/json',
+    "Accept": "application/json",
+    "api-key": "fc5ffca1fa884554acaa0a597569312b"
   },
 });
 

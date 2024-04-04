@@ -31,3 +31,25 @@ export const filterBooksCategory = async (category_id) => {
         console.log("Une erreur s'est produite : ", error);
     }
 }
+
+
+export const getFavoriteBooks = async (uid) => {
+    try {
+        const response = await axiosInstance.get(`users/${uid}/favorites`)
+        return response.data
+    } 
+    catch (error){
+        console.log("Une erreur s'est produite : ", error);
+    }
+}
+
+
+export const SearchBooks = async (query, category=null) => {
+    try {
+        const response = await axiosInstance.get(`books/search?q=${query}${category ? `&category=${category}` : ""}`)
+        return response.data
+    } 
+    catch (error){
+        console.log("Une erreur s'est produite : ", error);
+    }
+}

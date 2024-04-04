@@ -1,9 +1,10 @@
 import { Truncate } from "@/utils/truncate";
 import { Icon } from "@iconify/react";
+import Image from "next/image";
 import React from "react";
 
 
-export const BookCardFlex = () => {
+export const BookCardFlex = ({book}) => {
   return (
     <div className="p-2 bg-gray-600 hover:bg-green-800 cursor-pointer  flex gap-2 rounded-md [&_.hidden]:hover:flex">
       <div className="h-40 w-32 bg-slate-400 relative ">
@@ -30,14 +31,20 @@ export const BookCardFlex = () => {
             <span className="text-sm">48</span>
           </div>
         </div>
-        <img className="w-full h-full" src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1519632815i/37706596.jpg" />
+        <Image className="w-full h-full" 
+        src={
+          book?.banner != null ? book?.banner : "/assets/images/default_book_cover.png" }
+          alt="book image"
+          width={200}
+          height={200}
+        />
       </div>
       <div>
-        <h6 className="font-bold text-md">From the mixed up files</h6>
+        <h6 className="font-bold text-md">{book?.name }</h6>
         <div className="flex items-center gap-2 mt-2 text-sm text-gray-400">
-          <p>El Konigsburg</p>{" "}
+          <p>{ book?.author }</p>{" "}
           <div className="w-2 h-2 rounded-full  bg-slate-400"></div>{" "}
-          <p>March 1998</p>
+          <p>{book?.release_date}</p>
         </div>
         <div className="flex mt-1 items-center gap-1">
         <Icon icon="ph:star-fill" className="text-yellow-200" />
@@ -45,11 +52,11 @@ export const BookCardFlex = () => {
         <Icon icon="ph:star-fill" className="text-yellow-200" />
         <Icon icon="ph:star-fill" />
         <Icon icon="ph:star-fill" />
-        <span className="font-bold">(3.2)</span>
+        <span className="font-bold">({book?.rate_count})</span>
         </div>
 
         <p className="text-xs font-bold mt-2 w-52">
-          <Truncate str={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptatem eveniet quisquam totam natus animi sint tempore atque ea distinctio sunt doloribus sit sequi veniam officia fugiat eaque laboriosam vel."} max={100} len={100}  />
+          <Truncate str={book?.resume} max={100} len={100}  />
 
         </p>
       </div>
