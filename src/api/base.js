@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://127.0.0.1:5000/',
+  baseURL: 'https://fd41-41-82-13-107.ngrok-free.app/',
   headers: {
     'Content-Type': 'application/json',
     "Accept": "application/json",
