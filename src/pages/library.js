@@ -1,11 +1,16 @@
+import { getUserLoans } from "@/api/loans";
 import { BookCardCategory } from "@/components/card/BookCardCategory";
+import { Loader } from "@/components/includes/loader";
 import { Layout } from "@/components/layout/layout";
 import { ShowBookAside } from "@/components/modals/ShowBookAside";
+import { SimpleCardSekeleton } from "@/components/skeletons/public/SimpleCard";
+import { AuthContext } from "@/context/authContext";
 import { Icon } from "@iconify/react";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useContext, useEffect, useState } from "react";
 
 const Library = () => {
-  const books = [
+  const booksp = [
     {
       id: 1,
       title: "Mind platter",
@@ -63,10 +68,93 @@ const Library = () => {
     },
   ];
 
+  const status = [
+    {
+      id: 1,
+      title: "Tous",
+      code : "All"
+    },
+    {
+      id: 2,
+      title: "Demandes",
+      code : "Pending"
+    },
+    {
+      id: 3,
+      title: "Emprunts",
+      code : "Active"
+    },
+    {
+      id: 4,
+      title: "Rendu",
+      code : "Finished"
+    }
+  ]
+
+
+  const [curentStatus, setCurrentStatus] = useState("All");
+
+
+  const [books , setBooks] = useState([])
+
+  const [loading, setLoading] = useState(true)
+
+  const { user } = useContext(AuthContext)
+  
   const [filter, setFilter] = useState("all");
 
+  const router =  useRouter()
+
+  const get_books = async () => {
+    setLoading(true)
+    console.log(user);
+    try {
+      const data = await getUserLoans(user?.id)
+      if (data) {
+        console.log(data);
+        setBooks(data)
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    get_books()
+  }, []);
+
+
+  const handleFilter = async () => {
+    setLoading(true)
+    try {
+      if( filter === "All") {
+        const data = await getUserLoans(user?.id)
+        if (data) {
+          setBooks(data)
+        }
+      } else {
+        const data = await getUserLoans(user?.id, filter)
+        if (data) {
+          setBooks(data)
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    handleFilter()
+  }, [filter]);
+
   const handleChangeFilter = (e) => {
+    setLoading(true)
     setFilter(e.target.value);
+    console.log(filter);
   };
 
   return (
@@ -89,76 +177,27 @@ const Library = () => {
         </div>
         {/* <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-9 gap-4"> */}
         <div className="py-4 px-2 mt-2 rounded-sm overflow-x-auto border-2  border-dashed border-gray-800 scrollbar-none flex gap-6">
-        <div>
-            <label
-              htmlFor="all"
+          {
+            status.map((item) => (
+              <div key={item.id}>
+              <label
+              htmlFor={item.code}
               className={`py-2  px-5 font-semibold rounded-md  flex gap-1 items-center cursor-pointer ${
-                filter == "all" ? "bg-green-600" : "bg-gray-600"
+                filter == item.code ? "bg-green-600" : "bg-gray-600"
               }`}
             >
-              Tous
+              {item.title}
             </label>
             <input
-              id="all"
+              id={item.code}
               type="radio"
               className="hidden"
-              value="all"
+              value={item.code}
               onClick={handleChangeFilter}
             />
-          </div>
-
-          <div>
-            <label
-              htmlFor="loaned"
-              className={`py-2  px-5 font-semibold rounded-md  flex gap-1 items-center cursor-pointer ${
-                filter == "loaned" ? "bg-green-600" : "bg-gray-600"
-              }`}
-            >
-              Empruntes
-            </label>
-            <input
-              id="loaned"
-              type="radio"
-              className="hidden"
-              value="loaned"
-              onClick={handleChangeFilter}
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="finished"
-              className={`py-2  px-5 font-semibold rounded-md  flex gap-1 items-center cursor-pointer ${
-                filter == "back" ? "bg-green-600" : "bg-gray-600"
-              }`}
-            >
-              Rendu
-            </label>
-            <input
-              id="finished"
-              type="radio"
-              className="hidden"
-              value="back"
-              onClick={handleChangeFilter}
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="asked"
-              className={`py-2  px-5 font-semibold rounded-md  flex gap-1 items-center cursor-pointer ${
-                filter == "asked" ? "bg-green-600" : "bg-gray-600"
-              }`}
-            >
-              Demandes
-            </label>
-            <input
-              id="asked"
-              type="radio"
-              className="hidden"
-              value="asked"
-              onClick={handleChangeFilter}
-            />
-          </div>
-
+            </div>
+            ))
+          }
 
         </div>
       </form>
@@ -170,17 +209,29 @@ const Library = () => {
           </button>
         </div>
         <div className="grid grid-cols-2 :grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 mt-4 items-center">
-          {books.map((book) => {
-            return (
-              <BookCardCategory
-                book={book}
-                onclick={(e) => {
-                  console.log(book.title);
-                }}
-                key={book.id}
-              />
-            );
-          })}
+              {
+                loading && (
+                  <>
+                  
+                  <SimpleCardSekeleton /> 
+                  <SimpleCardSekeleton /> 
+                  <SimpleCardSekeleton /> 
+                  <SimpleCardSekeleton /> 
+                  <SimpleCardSekeleton /> 
+                  <SimpleCardSekeleton /> 
+                  </>
+                )
+              }
+
+              {
+                books && !loading  && books.map((book) => <BookCardCategory key={book.id} book={book?.book_copy?.book} />)
+              }
+
+              {
+                !loading && books.length == 0 && <p className="text-center">Aucun livre dans votre library</p>
+              }
+
+              
         </div>
       </div>
     </Layout>

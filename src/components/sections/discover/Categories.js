@@ -2,6 +2,7 @@ import { filterBooksCategory, getBooks, getCategories } from '@/api/books'
 import { BookCardCategory } from '@/components/card/BookCardCategory'
 import { Loader } from '@/components/includes/loader'
 import { ShowBookAside } from '@/components/modals/ShowBookAside'
+import { SimpleCardSekeleton } from '@/components/skeletons/public/SimpleCard'
 import { Icon } from '@iconify/react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
@@ -31,8 +32,18 @@ export const Categories = () => {
   }
 
   useEffect(() => {
+
+    let categoriesDidMount = true
+
+    if (categoriesDidMount) {
+      get_categories()
+    }
+
       get_categories()
       get_books()
+    return () => {
+      categoriesDidMount = false
+    }
   }, []);
 
   
@@ -56,7 +67,6 @@ export const Categories = () => {
   const [selectedBook, setSelectedBook] = useState(null)
   return (
     <div className='p-6 bg-gray-50 dark:bg-gray-800 rounded-sm overflow-hidden relative'>
-      <Loader isloading={loading} />
       <ShowBookAside book={selectedBook} setBook={setSelectedBook} />
         <div className='flex justify-between items-center'>
         <h6 className='text-lg font-semibold'>Categories</h6>
@@ -71,6 +81,7 @@ export const Categories = () => {
               value="all"
               onClick={handleChangeFilter} />
           </div>
+          
             {
               categories?.map((category) =>{
                 return (
@@ -85,10 +96,22 @@ export const Categories = () => {
             }
 
         </form>
+            {
+              loading && (
+            <div className='grid grid-cols-2 :grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 mt-4 items-center'>
 
+                <SimpleCardSekeleton />
+                <SimpleCardSekeleton />
+                <SimpleCardSekeleton />
+                <SimpleCardSekeleton />
+                <SimpleCardSekeleton />
+                <SimpleCardSekeleton />
+                </div>
+              )
+            }
 
           {
-            books.length > 0 ? 
+            books && !loading &&
             (
             <div className='grid grid-cols-2 :grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 mt-4 items-center'>
               {books.map((book) =>{
@@ -99,12 +122,16 @@ export const Categories = () => {
                 )
               })}
             </div>
-            ) : (
-                <div className={`flex justify-center flex-col w-full items-center ${loading ? "h-80  w-full" : ""}`}>
-                  <Image className={`${loading ? "hidden" : ""}`} src="/assets/images/empty_books.png" width={400} height={400} alt="ampty books" />
-                  <h3 className={`${loading ? "hidden" : ""} text-3xl font-semibold`}>Aucun livre trouve pour cette categorie</h3>
-                  </div>
-              )
+            )
+          }
+
+          {
+            !loading && books?.length == 0 && (
+              <div className={`flex justify-center flex-col w-full items-center`}>
+              <Image className={`${loading ? "hidden" : ""}`} src="/assets/images/empty_books.png" width={400} height={400} alt="ampty books" />
+              <h3 className={`${loading ? "hidden" : ""} text-3xl font-semibold`}>Aucun livre trouve pour cette categorie</h3>
+              </div>
+            )
           }
     </div>
   )

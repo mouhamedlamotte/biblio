@@ -68,7 +68,6 @@ const Search = () => {
 
 
 
-  const random_color = colors[Math.floor(Math.random() * colors.length)]
 
 
 
@@ -164,7 +163,7 @@ const Search = () => {
           
 
 
-      <Recommend />
+      {/* <Recommend /> */}
     </Layout>
   );
 };

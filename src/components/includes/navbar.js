@@ -3,7 +3,6 @@ import { Icon } from "@iconify/react";
 import React, { useContext, useState } from "react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
-import { Logout } from "@/api/auth/logout";
 import { toast } from "react-toastify";
 import { Cookies } from "react-cookie";
 import Image from "next/image";
