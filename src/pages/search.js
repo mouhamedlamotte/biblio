@@ -73,10 +73,8 @@ const Search = () => {
 
 
   useEffect(  () => {
-    return () => {
       get_q_param()
       get_gategories()
-    };
   }, []);
 
   const handleChangeQuery = (e) => {

@@ -40,9 +40,7 @@ export const AuthContextProvider = ({ children }) => {
 
 
     useEffect(() => {
-        return () => {
-            get_user()
-        };
+        get_user()
     }, [router]);
 
     return (

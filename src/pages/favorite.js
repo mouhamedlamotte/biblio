@@ -23,9 +23,7 @@ const Favorite = () => {
   }
 
   useEffect(() => {
-    return () => {
       get_favorites()
-    };
   }, [router]);
 
 
