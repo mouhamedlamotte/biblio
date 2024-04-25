@@ -6,8 +6,8 @@ import React from "react";
 
 const Category = () => {
   return (
-    <Layout>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <Layout className="">
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <div className="bg-yellow-500 rounded-md *:text-black cursor-pointer">
           <div className="p-4">
             <div className="flex justify-between">
@@ -149,6 +149,10 @@ const Category = () => {
             </div>
           </div>
         </div>
+      </div> */}
+
+      <div className="flex justify-center items-center h-[80vh]  w-full">
+        <h3 className="text-3xl font-sans font-bold">Bientot disponible</h3>
       </div>
     </Layout>
   );

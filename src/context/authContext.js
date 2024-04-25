@@ -21,22 +21,26 @@ export const AuthContextProvider = ({ children }) => {
         if (access_token) {
             const decoded_token = jwtDecode(access_token);
             const sub = decoded_token.sub
-            const user_id = sub.user_id
+            const user_id = sub?.user_id
             return user_id
         }
     }
 
-
-
-    const get_user = async () => {
-        const user_id = get_user_id();
-        if (user_id) {
-            const user = await getUser(user_id)
-            if (user) {
-                setUser(user)
-            }
+    const get_user = () => {
+        const access_token = get_user_tokken();
+        if (access_token) {
+            const decoded_token = jwtDecode(access_token);
+            const sub = decoded_token.sub
+            console.log(sub);
+            const user = sub?.user
+            console.log(user);
+            setUser(user)
         }
     }
+   
+
+
+    
 
 
     useEffect(() => {

@@ -11,9 +11,9 @@ export const getCategories = async () => {
 }
 
 
-export const getBooks = async () => {
+export const getBooks = async (limit = null, categori_id = null) => {
     try {
-        const response = await axiosInstance.get("books")
+        const response = await axiosInstance.get(`books${limit != null ? `?limit=${limit}` : ""}${categori_id != null ? `&categori_id=${categori_id}` : ""}`)
         return response.data
     } 
     catch (error){
@@ -22,7 +22,7 @@ export const getBooks = async () => {
 }
 
 
-export const filterBooksCategory = async (category_id) => {
+export const filterBooksCategory = async (category_id, limit=null) => {
     try {
         const response = await axiosInstance.get(`books/filter?category_id=${category_id}`)
         return response.data

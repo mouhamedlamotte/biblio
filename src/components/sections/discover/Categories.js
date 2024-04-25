@@ -24,7 +24,7 @@ export const Categories = () => {
     
     const get_books = async () => {
       setLoading(true)
-      const data = await getBooks()
+      const data = await getBooks(12)
       setLoading(false)
       if (data) {
         setBooks(data)
@@ -52,15 +52,17 @@ export const Categories = () => {
   const [filter, setFilter] = useState("all")
 
   const handleChangeFilter = async (e) =>{
+    setLoading(true)
     setFilter(e.target.value)
     if (e.target.value == "all") {
       get_books()
     } else {
-      const data = await filterBooksCategory(e.target.value)
+      const data = await getBooks(12, e.target.value)
       if (data) {
         setBooks(data)
       }
     }
+    setLoading(false)
 
   }
 
@@ -68,20 +70,23 @@ export const Categories = () => {
   return (
     <div className='p-6 bg-gray-50 dark:bg-gray-800 rounded-sm overflow-hidden relative'>
       <ShowBookAside book={selectedBook} setBook={setSelectedBook} />
-        <div className='flex justify-between items-center'>
-        <h6 className='text-lg font-semibold'>Categories</h6>
+        <div className='flex justify-between items-center border-b border-gray-700 pb-4'>
+        <h6 className='text-lg font-semibold'>Decouvrer les meilleures livre</h6>
         <button className='bg-slate-950 py-1 px-2 font-semibold rounded-md text-green-400 flex gap-1 items-center'>
             <Icon icon="solar:list-down-broken" />
         </button>
         </div>
         <form className='py-3 flex gap-4 overflow-y-hidden overflow-x-scroll scrollbar-none'>
-          <div>
+          {
+            categories && (
+              <>
+              <div>
               <label htmlFor='all' className={`py-1  px-2 font-semibold rounded-md  flex gap-1 items-center cursor-pointer ${ filter == "all" ? "bg-green-600" : "bg-gray-600" }`}>all</label>
               <input id='all' type="radio" className='hidden'
               value="all"
               onClick={handleChangeFilter} />
           </div>
-          
+
             {
               categories?.map((category) =>{
                 return (
@@ -94,12 +99,48 @@ export const Categories = () => {
                 )
               })
             }
+            </>
+            )
+          }
+
+
+          {
+            !categories && (
+              <>
+              
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              </>
+            )
+          }
+          
 
         </form>
             {
               loading && (
-            <div className='grid grid-cols-2 :grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 mt-4 items-center'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 mt-4 items-center'>
 
+                <SimpleCardSekeleton />
+                <SimpleCardSekeleton />
+                <SimpleCardSekeleton />
+                <SimpleCardSekeleton />
+                <SimpleCardSekeleton />
+                <SimpleCardSekeleton />
                 <SimpleCardSekeleton />
                 <SimpleCardSekeleton />
                 <SimpleCardSekeleton />
@@ -113,7 +154,7 @@ export const Categories = () => {
           {
             books && !loading &&
             (
-            <div className='grid grid-cols-2 :grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 mt-4 items-center'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 mt-4 items-center'>
               {books.map((book) =>{
                 return (
                   <BookCardCategory book={book} onclick={(e) =>{
@@ -127,7 +168,7 @@ export const Categories = () => {
 
           {
             !loading && books?.length == 0 && (
-              <div className={`flex justify-center flex-col w-full items-center`}>
+              <div className={`flex justify-center flex-col w-full items-center h-[50vh]`}>
               <Image className={`${loading ? "hidden" : ""}`} src="/assets/images/empty_books.png" width={400} height={400} alt="ampty books" />
               <h3 className={`${loading ? "hidden" : ""} text-3xl font-semibold`}>Aucun livre trouve pour cette categorie</h3>
               </div>

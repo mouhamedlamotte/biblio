@@ -5,10 +5,12 @@ import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 
-export const LoginForm = () => {
+export const LoginForm = ({nextPath = "/"}) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const router = useRouter()
+    console.log(nextPath);
+
 
     const handleSubmit = async (e) => {
       e.preventDefault()
@@ -18,8 +20,9 @@ export const LoginForm = () => {
       const response = await LoginUser(user)
       if (response) {
           const user = response.data
+          console.log(nextPath);
           // router.refresh()
-          router.push('/')
+          router.push(nextPath)
 
       }else{
           toast.error("Identifiant incorrect")

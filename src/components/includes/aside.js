@@ -3,17 +3,20 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 
-export const Aside = () => {
+export const Aside = ({isAsideCollapsed, setIsAsideCollapsed}) => {
 
    const router = useRouter()
 
   return (
-    <aside id="cta-button-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gray-50 dark:bg-gray-800" aria-label="Sidebar">
+    <aside id="cta-button-sidebar" className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform md:translate-x-0 bg-gray-50 dark:bg-gray-800   ${isAsideCollapsed ? "-translate-x-full" : "translate-x-0"}`} aria-label="Sidebar">
+<div className='flex justify-between p-4 items-center'>
 
-      <Link href="/" className='p-4 flex items-center'>
+      <Link href="/" className='flex items-center'>
          <h3 className='text-3xl tracking-wider'>Bi<span className='font-bold text-green-500'>Bli</span></h3>
          <Icon icon="iconamoon:discover-fill" fontSize={25} className='text-green-500' />
       </Link>
+      <Icon icon="mingcute:close-fill" fontSize={30} className='text-gray-400 cursor-pointer font-bold md:hidden' onClick={() => setIsAsideCollapsed(true)} />
+</div>
 
     <div className="h-full px-3 py-4 overflow-y-auto ">
        <ul className="space-y-2 font-medium">
@@ -33,15 +36,18 @@ export const Aside = () => {
              <Link href="library" className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white  group ${ router.pathname == "/library" ? "bg-green-500  *:text-white " : "hover:bg-gray-700" }`}>
              <Icon icon="clarity:library-solid"  fontSize={30} className='text-gray-400 dark:group-hover:text-white' />
                 <span className="flex-1 ms-3 whitespace-nowrap">Library</span>
-                <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
+                {/* <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span> */}
              </Link>
           </li>
           <li>
           </li>
           <li>
-             <a href="#" className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white  group ${ router.pathname == "/recommendation" ? "bg-green-500  *:text-white " : "hover:bg-gray-700" }`}>
-             <Icon icon="carbon:recommend" fontSize={30} className='text-gray-400 dark:group-hover:text-white' />
+             <a  className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white opacity-60 group ${ router.pathname == "/recommendation" ? "bg-green-500  *:text-white " :"" }`} >
+             <Icon icon="carbon:recommend" fontSize={30} className='text-gray-400 ' />
+             <div>
                 <span className="flex-1 ms-3 whitespace-nowrap">Recommendation</span>
+                <p className='flex-1 ms-3 whitespace-nowrap text-xs font-thin text-green-300'>coming soon</p>
+             </div>
              </a>
           </li>
           <li>
@@ -88,10 +94,8 @@ export const Aside = () => {
          
          <li>
             <a href="#" className="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
-               <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 17 20">
-                  <path d="M7.958 19.393a7.7 7.7 0 0 1-6.715-3.439c-2.868-4.832 0-9.376.944-10.654l.091-.122a3.286 3.286 0 0 0 .765-3.288A1 1 0 0 1 4.6.8c.133.1.313.212.525.347A10.451 10.451 0 0 1 10.6 9.3c.5-1.06.772-2.213.8-3.385a1 1 0 0 1 1.592-.758c1.636 1.205 4.638 6.081 2.019 10.441a8.177 8.177 0 0 1-7.053 3.795Z"/>
-               </svg>
-               <span className="ms-3">Upgrade to Pro</span>
+            <Icon icon="tdesign:api" />
+               <span className="ms-3">API</span>
             </a>
          </li>
       </ul>

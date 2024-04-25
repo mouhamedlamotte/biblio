@@ -1,72 +1,19 @@
 import { getUserLoans } from "@/api/loans";
 import { BookCardCategory } from "@/components/card/BookCardCategory";
-import { Loader } from "@/components/includes/loader";
 import { Layout } from "@/components/layout/layout";
-import { ShowBookAside } from "@/components/modals/ShowBookAside";
+
+
 import { SimpleCardSekeleton } from "@/components/skeletons/public/SimpleCard";
 import { AuthContext } from "@/context/authContext";
+import { ProtectedRouteWrapper } from "@/security/ProtectedRoute";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 
 const Library = () => {
-  const booksp = [
-    {
-      id: 1,
-      title: "Mind platter",
-      author: "zebian",
-    },
-    {
-      id: 2,
-      title: "from the mixed up",
-      author: "el konig",
-    },
-    {
-      id: 3,
-      title: "diambar",
-      author: "aly",
-    },
-    {
-      id: 4,
-      title: "diambar",
-      author: "aly",
-    },
-    {
-      id: 5,
-      title: "diambar",
-      author: "aly",
-    },
-    {
-      id: 6,
-      title: "diambar",
-      author: "aly",
-    },
-    {
-      id: 7,
-      title: "diambar",
-      author: "aly",
-    },
-    {
-      id: 8,
-      title: "diambar",
-      author: "aly",
-    },
-    {
-      id: 9,
-      title: "diambar",
-      author: "aly",
-    },
-    {
-      id: 10,
-      title: "diambar",
-      author: "aly",
-    },
-    {
-      id: 11,
-      title: "diambar",
-      author: "aly",
-    },
-  ];
+
+
+  const [seletectStatus, setSeletectStatus] = useState("dans votre bibliotheque");
 
   const status = [
     {
@@ -82,17 +29,17 @@ const Library = () => {
     {
       id: 3,
       title: "Emprunts",
-      code : "Active"
+      code : "Confirmed"
     },
     {
       id: 4,
       title: "Rendu",
-      code : "Finished"
+      code : "Returned"
     }
   ]
 
 
-  const [curentStatus, setCurrentStatus] = useState("All");
+  
 
 
   const [books , setBooks] = useState([])
@@ -101,64 +48,46 @@ const Library = () => {
 
   const { user } = useContext(AuthContext)
   
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState("All");
 
   const router =  useRouter()
 
-  const get_books = async () => {
-    setLoading(true)
-    console.log(user);
-    try {
-      const data = await getUserLoans(user?.id)
-      if (data) {
-        console.log(data);
-        setBooks(data)
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false)
-    }
-  }
+
 
   useEffect(() => {
-    get_books()
-  }, []);
-
-
-  const handleFilter = async () => {
-    setLoading(true)
-    try {
-      if( filter === "All") {
-        const data = await getUserLoans(user?.id)
-        if (data) {
-          setBooks(data)
+    const fetchData = async () => {
+        setLoading(true);
+        try {
+            if (filter == "All") {
+                const data = await getUserLoans(user?.id);
+                setBooks(data || []);
+                return
+            }
+            const data = await getUserLoans(user?.id, filter);
+            setBooks(data || []);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
         }
-      } else {
-        const data = await getUserLoans(user?.id, filter)
-        if (data) {
-          setBooks(data)
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false)
-    }
-  }
+    };
 
-  useEffect(() => {
-    handleFilter()
-  }, [filter]);
+    fetchData();
+}, [user, filter]);
 
-  const handleChangeFilter = (e) => {
-    setLoading(true)
+const handleChangeFilter = (e) => {
+    
     setFilter(e.target.value);
-    console.log(filter);
-  };
+};
+
+
+
+
 
   return (
-    <Layout>
+    <ProtectedRouteWrapper>
+
+    <Layout >
             <form
         method="get"
         action="/search"
@@ -194,6 +123,7 @@ const Library = () => {
               className="hidden"
               value={item.code}
               onClick={handleChangeFilter}
+              name={item.title}
             />
             </div>
             ))
@@ -202,8 +132,8 @@ const Library = () => {
         </div>
       </form>
       <div className="p-6 bg-gray-50 dark:bg-gray-800 rounded-sm">
-        <div className="flex justify-between items-center">
-          <h6 className="text-lg font-semibold">Ma Library</h6>
+        <div className="flex justify-between items-center border-b border-gray-700 pb-4">
+          <h6 className="text-lg font-semibold ">Ma Library</h6>
           <button className="bg-slate-950 py-1 px-2 font-semibold rounded-md text-green-400 flex gap-1 items-center">
             <Icon icon="solar:list-down-broken" />
           </button>
@@ -227,14 +157,19 @@ const Library = () => {
                 books && !loading  && books.map((book) => <BookCardCategory key={book.id} book={book?.book_copy?.book} />)
               }
 
-              {
-                !loading && books.length == 0 && <p className="text-center">Aucun livre dans votre library</p>
-              }
 
               
         </div>
+              {
+                !loading && books.length == 0 && 
+                
+                <div className="p-4 flex justify-center items-center w-full h-[20vh]">
+                  <h3 className="text-center font-bold text-xl">Aucun livre  {seletectStatus}</h3>
+                </div>
+              }
       </div>
     </Layout>
+    </ProtectedRouteWrapper>
   );
 };
 
