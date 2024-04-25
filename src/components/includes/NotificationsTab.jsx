@@ -3,9 +3,7 @@ import React from 'react'
 
 export const NotificationsTab = () => {
   return (
-    <div className={`z-10 absolute w-96 max-w-sm  bg-gray-800 py    -4 divide-y divide-gray-100 rounded-lg -ml-96 md":ml-60 mt-6 shadow  dark:bg-gray-700 dark:divide-gray-600 ${
-        "userTab" ? "hidden" : "hidden"
-      }`}>
+    <div className={`z-10 absolute w-96 max-w-sm  bg-gray-800 py    -4 divide-y divide-gray-100 rounded-lg -ml-96 md":ml-60 mt-6 shadow  dark:bg-gray-700 dark:divide-gray-600 hidden`}>
         <h3 className='text-lg font-semibold p-3'>Notifications</h3>
     <div className="relative shadow-lg">
       <button onClick='return this.parentNode.remove()'

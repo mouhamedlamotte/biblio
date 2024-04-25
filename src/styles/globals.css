@@ -37,7 +37,6 @@ body {
   display: none;
 }
 
-/* Custom scrollbar */
 body::-webkit-scrollbar {
   width: 6px;
 }
@@ -63,10 +62,6 @@ body::-webkit-scrollbar-thumb:hover {
   }
 }
 
-/* .mtop:hover {
-  animation: movetop 1s alternate;
-
-} */
 
 
 .login-banner-left{
@@ -76,14 +71,6 @@ body::-webkit-scrollbar-thumb:hover {
 
 }
 
-/* 
-.slbg{
-  background-image: url("/assets/images/rbg.png") !important;
-  background-position:top;
-  background-size: cover;
-  /* background-attachment: fixed; */
-  /* background-repeat: no-repeat; */
-/* } */ */
 
 .loader {
   width: 75px;
@@ -114,7 +101,6 @@ body::-webkit-scrollbar-thumb:hover {
 
 
 
-/* HTML: <div class="loader"></div> */
 .section_loader {
   width: 55px;
   aspect-ratio: 1;
@@ -139,7 +125,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 
 
-/* HTML: <div class="loader"></div> */
+
 .loader-s {
   width: 50px;
   aspect-ratio: 1;
