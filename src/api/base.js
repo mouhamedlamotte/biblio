@@ -2,8 +2,8 @@ import axios from 'axios';
 import { Cookies } from 'react-cookie';
 
 export const axiosInstance = axios.create({
-//   baseURL: 'https://resonant-helena-mbl.koyeb.app/',
-  baseURL: 'http://localhost:5000/',
+  baseURL: 'https://frequent-garland-mbllm.koyeb.app/',
+//   baseURL: 'http://localhost:5000/',
   headers: {
     'Content-Type': 'application/json',
     "Accept": "application/json",
