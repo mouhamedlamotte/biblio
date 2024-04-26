@@ -44,7 +44,7 @@ export const ShowBookAside = ({ book, setBook }) => {
   return (
     <>
       {book && (
-        <div className="fixed top-0 right-0 z-40 w-72 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gray-50 dark:bg-slate-950 rounded ">
+        <div className="fixed top-0 right-0 z-40 w-72 h-screen  bg-gray-50 dark:bg-slate-950 rounded ">
           <div className="absolute flex  top-4  -left-4">
             <button
               className=" p-2 rounded-lg bg-green-500 hover:opacity-85 hover:mr-2"
