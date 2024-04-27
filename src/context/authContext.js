@@ -31,9 +31,7 @@ export const AuthContextProvider = ({ children }) => {
         if (access_token) {
             const decoded_token = jwtDecode(access_token);
             const sub = decoded_token.sub
-            console.log(sub);
             const user = sub?.user
-            console.log(user);
             setUser(user)
         }
     }

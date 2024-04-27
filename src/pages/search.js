@@ -141,7 +141,7 @@ const Search = () => {
   const filterRecentSearche = (s)=>{
     let rs = localStorage.getItem("recent_searches")
     rs = JSON.parse(rs)
-    let frs = rs.filter((r) => r.toLowerCase().includes(s.toLowerCase()))
+    let frs = rs?.filter((r) => r.toLowerCase().includes(s.toLowerCase()))
     setRecentSearches(frs)
   }
 

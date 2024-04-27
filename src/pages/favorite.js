@@ -5,6 +5,7 @@ import { Recommend } from "@/components/sections/discover/Recommend";
 import { SimpleCardSekeleton } from "@/components/skeletons/public/SimpleCard";
 import { AuthContext } from "@/context/authContext";
 import { ProtectedRouteWrapper } from "@/security/ProtectedRoute";
+import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -33,8 +34,9 @@ const Favorite = () => {
     <ProtectedRouteWrapper>
     <Layout title={"Mes favory"}>
       <div className="p-6 bg-gray-50 dark:bg-gray-800 rounded-sm">
-        <div className="border-b border-gray-700 pb-4">
+        <div className="border-b border-gray-700 pb-4 flex items-center justify-between">
         <h6 className="text-lg font-semibold">Mes favory</h6>
+        <Icon icon="mdi:cards-heart"  fontSize={25} />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3   gap-3 mt-4">
           {books?.map((book) => (
@@ -43,7 +45,6 @@ const Favorite = () => {
           {
                 loading && (
                   <>
-                  
                   <SimpleCardSekeleton /> 
                   <SimpleCardSekeleton /> 
                   <SimpleCardSekeleton /> 

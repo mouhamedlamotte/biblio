@@ -15,6 +15,8 @@ export const Navbar = ({ user, setIsAsideCollapsed }) => {
 
   const [userTab, setUserTab] = useState(false);
 
+  const [showNotifications, setShowNotifications] = useState(false);
+
   const handle_search = (e) => {
     e.preventDefault();
     router.push({
@@ -94,15 +96,21 @@ export const Navbar = ({ user, setIsAsideCollapsed }) => {
           </Link>
           {user ? (
             <div className="flex items-center gap-4">
+              
               <div className="relative">
+                <button
+                  onClick={() => setShowNotifications(!showNotifications)}
+                  className=""
+                  >
                 <Icon
-                  className="hidden text-gray-500"
+                  className="text-gray-500"
                   icon="mdi:bell"
-                  fontSize={25}
+                  fontSize={35}
                 />
-                <NotificationsTab />
+
+                </button>
+                <NotificationsTab collasped={!showNotifications} />
               </div>
-              <Icon className=" text-gray-500" icon="mdi:cart" fontSize={25} />
               <div className="relative">
                 <button
                   className="rounded-xl z-10 flex items-center p-0  md:px-2  gap-4 bg-slate-950 hover:bg-green-400 *:hover:text-white md:p-2 cursor-pointer"

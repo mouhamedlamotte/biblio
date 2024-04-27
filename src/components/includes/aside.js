@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { AdminAsideTab } from '../admin/AdminAsideTab'
 
 export const Aside = ({isAsideCollapsed, setIsAsideCollapsed}) => {
 
@@ -41,7 +42,7 @@ export const Aside = ({isAsideCollapsed, setIsAsideCollapsed}) => {
           </li>
           <li>
           </li>
-          <li>
+          <li className='hidden'>
              <a  className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white opacity-60 group ${ router.pathname == "/recommendation" ? "bg-green-500  *:text-white " :"" }`} >
              <Icon icon="carbon:recommend" fontSize={30} className='text-gray-400 ' />
              <div>
@@ -90,9 +91,11 @@ export const Aside = ({isAsideCollapsed, setIsAsideCollapsed}) => {
           </p>
           <a className="text-sm text-blue-800 underline font-medium hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300" href="#">Turn new navigation off</a>
        </div> */}
+      <AdminAsideTab/>
        <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
          
          <li>
+            
             <a href="#" className="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
             <Icon icon="tdesign:api" />
                <span className="ms-3">API</span>
