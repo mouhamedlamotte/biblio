@@ -14,11 +14,14 @@ const Search = () => {
   
   const [query, setQuery] = useState("");
 
-  const [books , setBooks] = useState([])
+  const [books , setBooks] = useState(null)
 
   const [filterCategories, setFilterCategories] = useState(null)
 
   const [loading, setLoading] = useState(false)
+
+
+  const [qtodisplay, setQtodisplay] = useState("")
 
 
 
@@ -56,15 +59,16 @@ const Search = () => {
   const search_books = async (query, category=null) => {
     setLoading(true)
     if (!query) {
-      setBooks([])
+      setBooks(null)
       setLoading(false)
       return
     } 
     const data = await SearchBooks(query, category);
     if (data && typeof data === "object") {
       setBooks(data)
+      setQtodisplay(query)
     }else{
-      setBooks([])
+      setBooks(null)
     }
     setLoading(false)
   }
@@ -151,7 +155,9 @@ const Search = () => {
 
         onSubmit={handleSubmitSearch}
       >
-        <div className="w-full bg-gray-800 rounded-md flex items-center px-3 relative">
+          <div className="mb-2 p-4 bg-gray-800">
+
+        <div className="w-full bg-slate-900 rounded-lg flex items-center px-3 relative">
           <input
             value={query}
             onChange={(e)=>{
@@ -161,8 +167,9 @@ const Search = () => {
               }else{
                 setRecentSearches([])
               }
+              setQtodisplay(null)
             }}
-            className="w-full flex-1 p-4  bg-transparent outline-none focus:outline group fill-transparent"
+            className="w-full flex-1 p-3  bg-transparent outline-none focus:outline group fill-transparent"
             placeholder="Rechercher un livre "
             name="q"
             autoComplete="off"
@@ -171,14 +178,16 @@ const Search = () => {
               // console.log(e);
             }}
           />
+          <button type="submit">
+
           <Icon icon="ic:round-search" fontSize={35} className="text-white" />
+          </button>
         <div className="absolute transition-all translate-y-2 scale-0 z-50 md:scale-100 ease-in duration-300 w-96 top-12  overflow-hidden bg-gray-700 rounded-b-md max-h-96 overflow-y-auto scrollbar-none">
 
           {
             recent_searches && recent_searches.map((r, i) => (
               <div key={r} className="p-2 hover:bg-gray-600 cursor-pointer flex justify-between  items-center w-full">
               <button
-              role="button"
               type="button"
                 className="w-full"
                   onClick={() => {
@@ -196,14 +205,6 @@ const Search = () => {
                 </div>
 
               </button>
-
-
-                {/* TODO: ZONE ROUGE  */}
-
-
-
-
-
               <input className="text-xs text-red-500 cursor-pointer hover:underline" type="button" value="Supprimer" 
                             onClick={()=>{
                               deleteRecentSearches(i)
@@ -216,9 +217,10 @@ const Search = () => {
           }
         </div>  
         </div>
+        </div>
         {/* <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-9 gap-4"> */}
       </form>
-        <div className="py-4 px-2 mt-2 rounded-sm overflow-x-auto border-2  border-dashed border-gray-800 scrollbar-none flex gap-6">
+        <div className="py-4 px-2 bg-gray-800 rounded-sm overflow-x-auto border-2  border-dashed border-gray-800 scrollbar-none flex gap-6">
 
           { 
             categories && (
@@ -268,6 +270,7 @@ const Search = () => {
             <h6 className="text-lg font-semibold truncate">
               Resultat de recherche pour <span className="text-green-500">{query}</span> 
             </h6>
+            <br/>
             <h6 className="text-lg font-semibold ">
                {filterCategories && <span> Catégorie : <span className="text-green-500">{filterCategories}</span></span>}
             </h6>
@@ -286,10 +289,10 @@ const Search = () => {
             </div>
           ) : 
           (
-            books?.length === 0 && !loading && (
+            books?.length === 0 && !loading && query && typeof books === "object" && qtodisplay &&(
               <div className="p-6 bg-gray-50 dark:bg-gray-800 rounded-sm">
               <h6 className="text-lg font-semibold">
-                Aucun resultat pour <span className="text-green-500">{query}</span> {filterCategories && <span> , catégorie : <span className="text-green-500">{filterCategories}</span></span>}
+                Aucun resultat pour <span className="text-green-500">{qtodisplay}</span> {filterCategories && <><br/><span> catégorie : <span className="text-green-500">{filterCategories}</span></span></>}
               </h6>
             </div>
             )

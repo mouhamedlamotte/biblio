@@ -108,23 +108,14 @@ export const Categories = () => {
             !categories && (
               <>
               
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
-              <div className='`py-1  px-2 font-semibold rounded-md animate-pulse flex gap-1 items-center bg-gray-600 h-8 w-20'></div>
+              {
+                [1,2,3,4,5,6,7,8,9,10].map((category) =>{
+                  return (
+                   <div key={category} className='py-4 animate-pulse  px-12   font-semibold rounded-md  flex gap-1 items-center cursor-pointer bg-slate-600'></div>
+                  )
+                })
+              }
+              
               </>
             )
           }

@@ -1,5 +1,6 @@
 import { registerUser } from '@/api/base'
 import { Button } from '@/components/ui/button'
+import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
@@ -9,6 +10,7 @@ export const RegisterForm = ({setIsloading}) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
+    const [pwitype, setPwitype] = useState("password")
     const router = useRouter()
 
     const handleSubmit = async (e) => {
@@ -79,17 +81,38 @@ export const RegisterForm = ({setIsloading}) => {
       <label htmlFor="password" className="font-bold">
         Password
       </label>
+      <div className='relative'>
       <input
       value={password}
       onChange={(e)=>{
         setPassword(e.target.value)
       }}
-        type="password"
+        type={pwitype}
         name="password"
         id="password"
-        placeholder="**********"
+        placeholder="password"
         className="bg-slate-700 p-2 rounded-md border-none focus:border focus w-full focus:border-green-500 outline-none"
       />
+      <button
+            onClick={(e)=>{
+              setPwitype(pwitype === "password" ? "text" : "password")
+            }}
+      className='absolute top-1/2 right-2 -translate-y-1/2'
+      type='button'
+      >
+      <Icon 
+
+
+      icon={`${pwitype === "password"? "mdi:eye-off-outline" : "mdi:eye-outline"}`}
+      
+      className="text-slate-500 " 
+
+      fontSize={25}
+
+      />  
+
+      </button>
+      </div>
     </div>
     <div className="flex justify-center mt-5">
       <Button type="sumbit" title={"Creer un compte"} />

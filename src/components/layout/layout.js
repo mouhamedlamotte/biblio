@@ -56,11 +56,11 @@ export const Layout =  ({ children, title }) => {
 
       <Aside  isAsideCollapsed={isAsideCollapsed} setIsAsideCollapsed={setIsAsideCollapsed}/>
 
-      <div className="md:ml-64  relative">
+      <div className="md:ml-64  relative dark:bg-slate-900">
       {/* <LoginModal showModal={showModal} setshowModal={setshowModal} isdomloading={isdomloading} /> */}
         <Loader isloading={false} />
         <Navbar user={user}  setIsAsideCollapsed={setIsAsideCollapsed}/>
-        <main className="p-4 flex flex-col gap-4">
+        <main className="py-4 md:p-4 flex flex-col gap-4">
           {children}</main>
       </div>
     </>

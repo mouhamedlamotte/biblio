@@ -6,7 +6,7 @@ import React from "react";
 
 export const BookCardFlex = ({book}) => {
   return (
-    <div className="p-2 bg-gray-600 hover:bg-green-800 cursor-pointer  flex gap-2 rounded-md [&_.hidden]:hover:flex">
+    <div className="p-2 bg-gray-600 hover:bg-green-800 cursor-pointer  flex  gap-1 md:gap-3 rounded-md [&_.hidden]:hover:flex">
       <div className="h-40 w-32 bg-slate-400 relative ">
       <div className="hidden justify-between absolute p-2  w-full">
           <button className={`p-1 bg-slate-950 rounded-md flex items-center justify-center z-50 ${ "liked" && "*:text-red-500" }`}
@@ -40,9 +40,13 @@ export const BookCardFlex = ({book}) => {
         />
       </div>
       <div>
-        <h6 className="font-bold text-md">{book?.name }</h6>
+        <h6 className="font-bold text-md">
+        <Truncate str={book?.name} max={20} len={20}  />
+
+        </h6>
         <div className="flex items-center gap-2 mt-2 text-sm text-gray-400">
-          <p>{ book?.author }</p>{" "}
+          <p>        <Truncate str={book?.author} max={15} len={15}  />
+</p>{" "}
           <div className="w-2 h-2 rounded-full  bg-slate-400"></div>{" "}
           <p>{book?.release_date}</p>
         </div>

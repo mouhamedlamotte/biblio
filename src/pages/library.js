@@ -95,17 +95,22 @@ const handleChangeFilter = (e) => {
           // e.preventDefault()
         }}
       >
-        <div className="w-full bg-gray-800 rounded-md flex items-center px-3 ">
+          <div className="mb-2 p-4 bg-gray-800">
+            
+        <div className="w-full bg-slate-900 rounded-lg  flex items-center px-3 ">
           <input
 
-            className="w-full flex-1 p-4  bg-transparent outline-none focus:outline group"
+            className="w-full flex-1 p-3  bg-transparent outline-none focus:outline group"
             placeholder="Rechercher un livre dans votre librairy"
             name="q"
           />
+          <button type="button">
           <Icon icon="ic:round-search" fontSize={35} className="text-white" />
+          </button>
         </div>
+          </div>
         {/* <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-9 gap-4"> */}
-        <div className="py-4 px-2 mt-2 rounded-sm overflow-x-auto border-2  border-dashed border-gray-800 scrollbar-none flex gap-6">
+        <div className="py-4 px-2 mt-4 rounded-sm overflow-x-auto border-2  border-dashed border-gray-800 scrollbar-none flex gap-6">
           {
             status.map((item) => (
               <div key={item.id}>
