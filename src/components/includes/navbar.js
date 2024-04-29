@@ -119,7 +119,7 @@ export const Navbar = ({ user, setIsAsideCollapsed }) => {
                   }}
                 >
                   <div className="h-8 w-8 bg-gray-100 rounded-full overflow-hidden">
-                    <Image
+                    <img
                       height={100}
                       width={100}
                       src={
