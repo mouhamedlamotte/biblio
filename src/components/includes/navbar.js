@@ -144,10 +144,12 @@ export const Navbar = ({ user, setIsAsideCollapsed }) => {
                     userTab ? "block" : "hidden"
                   }`}
                 >
-                  <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                  <button className="px-4 py-3 text-sm text-gray-900 dark:text-white text-start"
+                  onClick={() => router.push(`/profile`)}
+                  >
                     <div className="font-medium ">{user?.username}</div>
                     <div className="truncate">{user?.email}</div>
-                  </div>
+                  </button>
                   {/* <ul
                 className="py-2 text-sm text-gray-700 dark:text-gray-200"
                 aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton"
