@@ -65,7 +65,7 @@ export const NotificationsTab = ({collasped}) => {
 <Icon icon={notif?.icon} className="w-10 h-10 text-gray-500" />
     
         <div className="ml-3 overflow-hidden">
-          <p className="font-medium text-gray-50">Jan Doe</p>
+          <p className="font-medium text-gray-50">{user?.username}</p>
           <p className="max-w-xs text-sm  truncate">
             {notif?.message}
           </p>
