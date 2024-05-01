@@ -8,7 +8,7 @@ export const get_user_notifications = async (uid) => {
         return response.data
     } 
     catch (error){
-        console.log("Une erreur s'est produite : ", error);
+        // console.log("Une erreur s'est produite : ", error);
     }
 }
 
@@ -18,7 +18,7 @@ export const delete_user_notification = async (uid, notification_id) => {
         return response.data
     } 
     catch (error){
-        console.log("Une erreur s'est produite : ", error);
+        // console.log("Une erreur s'est produite : ", error);
     }
 }
 
@@ -28,7 +28,7 @@ export const delete_all_user_notifications = async (uid) => {
         return response.data
     } 
     catch (error){
-        console.log("Une erreur s'est produite : ", error);
+        // console.log("Une erreur s'est produite : ", error);
     }
 }
 
@@ -42,7 +42,7 @@ export const uploadAvatar = async (uid, avatar) => {
         }
     }
     catch (error){
-        console.log("Une erreur s'est produite : ", error);
+        // console.log("Une erreur s'est produite : ", error);
     }
 }
 
@@ -54,7 +54,7 @@ export const updateUser = async (uid, user) => {
 
     }
     catch (error){
-        console.log("Une erreur s'est produite : ", error);
+        // console.log("Une erreur s'est produite : ", error);
     }
 }
     

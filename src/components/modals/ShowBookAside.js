@@ -29,7 +29,6 @@ export const ShowBookAside = ({ book, setBook }) => {
 
     const res = await makeLoan(loan, user?.id);
     if (res) {
-      console.log(res);
       if (res.success == -1) {
         toast.error(res.message);
         setLoading(false);

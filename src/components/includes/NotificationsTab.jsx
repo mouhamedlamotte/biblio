@@ -12,7 +12,6 @@ export const NotificationsTab = ({collasped}) => {
   const [notifications, setNotifications] = useState([])
 
   const getNotifications = async () => {
-    console.log("geting notifications");
     const res = await get_user_notifications(user?.id)
     if (res) {
       setNotifications(res)
@@ -43,7 +42,7 @@ export const NotificationsTab = ({collasped}) => {
   if (collasped) return null
 
   return (
-    <div className={`z-10 absolute w-96 max-w-sm  bg-gray-800 py-3 divide-y divide-gray-100 rounded-lg -ml-96 md":ml-60  shadow  dark:bg-gray-700 dark:divide-gray-600`}>
+    <div className={`z-10 absolute w-64 md:w-96 max-w-sm  bg-gray-800 py-3 divide-y divide-gray-100 rounded-lg -ml-40 md:-ml-96   shadow  dark:bg-gray-700 dark:divide-gray-600`}>
       <div className='flex items-center p-2 justify-between'>
         <h3 className='text-lg font-semibold'>Notifications</h3>
         <button className='text-red-500 hover:underline'

@@ -21,7 +21,6 @@ const Favorite = () => {
     const data = await getFavoriteBooks(user?.id);
     if (data) {
       setBooks(data);
-      console.log(data);
     }
     setLoading(false)
   };

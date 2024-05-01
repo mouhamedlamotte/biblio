@@ -66,7 +66,6 @@ const Library = () => {
             const data = await getUserLoans(user?.id, filter);
             setBooks(data || []);
         } catch (error) {
-            console.log(error);
         } finally {
             setLoading(false);
         }

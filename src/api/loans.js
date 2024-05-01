@@ -7,7 +7,7 @@ export const getLoans = async (limit=null) => {
         return response.data
     } 
     catch (error){
-        console.log("Une erreur s'est produite : ", error);
+        // console.log("Une erreur s'est produite : ", error);
     }
 }
 
@@ -19,7 +19,7 @@ export const getUserLoans = async (uid, status=null) => {
         return response.data
     } 
     catch (error){
-        console.log("Une erreur s'est produite : ", error);
+        // console.log("Une erreur s'est produite : ", error);
     }
 }
 
@@ -31,7 +31,7 @@ export const makeLoan = async (loan, uid) => {
         return response.data
     } 
     catch (error){
-        console.log("Une erreur s'est produite : ", error);
+        // console.log("Une erreur s'est produite : ", error);
     }
 }
 
@@ -41,6 +41,6 @@ export const manageLoans = async (loan_id, action) => {
         return response.data
     } 
     catch (error){
-        console.log("Une erreur s'est produite : ", error);
+        // console.log("Une erreur s'est produite : ", error);
     }
 }

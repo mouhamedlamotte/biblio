@@ -25,7 +25,7 @@ export const RegisterForm = ({setIsloading}) => {
         let response = await registerUser(data)
         if (response) {
             const user = response.data
-            console.log(user);
+            
             toast.success("Enregistrement reussi")
             router.push('/auth/login')
         }else{

@@ -196,7 +196,7 @@ const Search = () => {
                     search_books(r)
                   }}
                   onKeyDownCapture={(e) => {
-                    console.log(i);
+                    // console.log(i);
                   }}
                 >
                 <div className="flex gap-2 items-center">

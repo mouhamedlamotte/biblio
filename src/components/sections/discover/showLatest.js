@@ -18,7 +18,6 @@ export const ShowLatest = () => {
 
   useEffect(() => {
     getBooks();
-    console.log(books);
   }, []);
 
   const { user } = useContext(AuthContext);

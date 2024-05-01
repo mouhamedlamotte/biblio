@@ -31,7 +31,7 @@ export const registerUser = async (data) =>{
         return response.data
     } 
     catch (error){
-        console.log("Une erreur s'est produite : ", error);
+        // console.log("Une erreur s'est produite : ", error);
     }
 }
 
@@ -47,7 +47,7 @@ export const LoginUser = async (user) =>{
 
     } 
     catch (error){
-        console.log("Une erreur s'est produite : ", error);
+        // console.log("Une erreur s'est produite : ", error);
     }
 }
 
@@ -61,7 +61,7 @@ export const getUser = async (uid) =>{
         }
     }
     catch (error){
-        console.log("Une erreur s'est produite : ", error);
+        // console.log("Une erreur s'est produite : ", error);
     }
 }
 

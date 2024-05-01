@@ -36,8 +36,6 @@ export const Layout =  ({ children, title }) => {
   useEffect(() => {
     let TimeoutId = setTimeout(() => {
       if (!user){
-        console.log("not user");
-        console.log(user);
         setshowModal(false)
       } 
       setisdomloading(false)

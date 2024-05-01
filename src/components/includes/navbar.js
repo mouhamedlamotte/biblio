@@ -89,9 +89,9 @@ export const Navbar = ({ user, setIsAsideCollapsed }) => {
         <div className="flex items-center ">
           <Link href={"/search"} className="flex md:hidden">
             <Icon
-              className=" text-gray-500 h-8 w-8"
+              className=" text-gray-500"
               icon="mdi:search"
-              fontSize={25}
+              fontSize={35}
             />
           </Link>
           {user ? (

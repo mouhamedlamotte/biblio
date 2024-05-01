@@ -23,7 +23,6 @@ const Profile = () => {
     const hadlechageinfo = (e) => {
         const { name, value } = e.target
         setUserinfo({ ...userinfo, [name]: value })
-        console.log([name], value);
     }
 
     const handleSubmit = async (e) => {
