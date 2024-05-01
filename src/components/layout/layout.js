@@ -6,6 +6,7 @@ import Head from "next/head";
 import { LoginModal } from "../modals/auth/LoginModal";
 import { AuthContext } from "@/context/authContext";
 import { useRouter } from "next/navigation";
+import useRegister from "@/api/mydash";
 
 
 
@@ -25,6 +26,7 @@ export const Layout =  ({ children, title }) => {
   const router = useRouter()
 
   const [isAsideCollapsed, setIsAsideCollapsed] = useState(true)
+  useRegister("Biblioloan", "site de gestion de bibliotheque");
 
 
   
